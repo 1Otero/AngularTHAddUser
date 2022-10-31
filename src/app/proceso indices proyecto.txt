@@ -1,0 +1,10 @@
+Generar correos <-> orden Primer nombre - primer apellido - ?ID - @ - cidenet.com.co 0 cidenet.com.us  
+Validar si el correo existe o colocar un numero incrementable en el correo 
+validar para eliminar usuario - confirmar si o no
+metodo colocar correo segun pais - cidenet.com.co 0 cidenet.com.us  
+validar caracteres de la A <-> Z 
+validar caracteres en Mayuscula
+validar caracteres sin acento ni Ñ
+Verificar si se cambiaron nombre para modificar correo
+Vista principal mostrar mostrar max 10
+Para modificar no se puede tocar fecha registro

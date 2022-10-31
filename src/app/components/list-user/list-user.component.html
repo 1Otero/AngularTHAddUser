@@ -1,0 +1,71 @@
+<table class="table table-striped">
+    <thead>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Area</th>
+        <th>Modificar | Eliminar</th>
+    </thead>
+    <tbody>
+        <!--<tr *ngFor="let i of listObservable | async">-->
+        <tr *ngFor="let i of listObservable">  
+            <th>{{i.PNombre}} {{i.SNombre}}</th>
+            <th>{{i.PApellido}} {{i.SApellido}}</th>
+            <th>{{areas[i.registro.Area]}}</th>
+            <th><a class="btn btn-warning" routerLink="/modify/{{i.Id}}">Modificar</a>|
+                <a class="btn btn-danger" (click)="deleteUser(i.Id)">Eliminar</a>
+            </th>
+        </tr>
+    </tbody>
+</table>
+<div class="container" *ngIf="cargando == true">
+    <h1>Cargando....</h1>
+</div>
+<div style="height:380px;"></div>
+<div *ngIf="cargando != true">
+<mat-form-field>
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="filtrar($event)" placeholder="buscar">
+</mat-form-field>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="table table-striped mat-elevation-z8 container">
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.Id}} </td>
+          </ng-container>
+        <ng-container matColumnDef="PNombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.PNombre}} </td>
+          </ng-container>
+          <ng-container matColumnDef="SNombre">
+            <th mat-header-cell *matHeaderCellDef> Segundo Nombre </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.SNombre}} </td>
+          </ng-container>
+          <ng-container matColumnDef="PApellido">
+            <th mat-header-cell *matHeaderCellDef> Apellido </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.PApellido}} </td>
+          </ng-container>
+          <ng-container matColumnDef="SApellido">
+            <th mat-header-cell *matHeaderCellDef> Segundo Apellido </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.SApellido}} </td>
+          </ng-container>
+        <ng-container matColumnDef="PaisEmpleo">
+            <th mat-header-cell *matHeaderCellDef> Pais Empleo </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.registro.PaisEmpleo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Area">
+            <th mat-header-cell *matHeaderCellDef> Area </th>
+            <td mat-cell *matCellDef="let articulo"> {{areas[articulo.registro.Area]}} </td>
+        </ng-container>
+        <ng-container matColumnDef="NumeroIdentificacion">
+            <th mat-header-cell *matHeaderCellDef> NumeroIdentificacion </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.registro.NumeroIdentificacion}} </td>
+        </ng-container>
+        <ng-container matColumnDef="CorreoElectronico">
+            <th mat-header-cell *matHeaderCellDef> CorreoElectronico </th>
+            <td mat-cell *matCellDef="let articulo"> {{articulo.registro.CorreoElectronico}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+    </table>
+</div>
+</div>
