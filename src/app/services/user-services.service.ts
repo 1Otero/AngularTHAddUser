@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
-import {Observable} from 'rxjs'
+import {HttpClient,HttpHeaders} from '@angular/common/http'
+import {Observable, retry} from 'rxjs'
 import {user} from '../model/user'
 
 @Injectable({
@@ -18,7 +18,8 @@ export class UserServicesService {
   async getAllUser():Promise<Observable<user[]>>{
     return await  this.http.get<user[]>(`${this.ruta}/`)
   }
-  async save(cli:any){
+  //async save(cli:any){
+  async save(cli:any):Promise<void>{
     await this.http.post<user>(`${this.ruta}/add`,cli)
     .subscribe(e => {
       console.log(e)
@@ -31,15 +32,17 @@ export class UserServicesService {
       console.log(e)
     })
   }
-  async delete(Id:Number){
-    console.log("Eliminando: " + Id)
-    await this.http.delete(`${this.ruta}/delete/id?id=${Id}`).subscribe() 
+  delete(Id:Number){
+    this.http.delete(`${this.ruta}/delete/id?id=${Id}`).subscribe(e => {
+      console.log("paso eliminar" + Id) 
+    }) 
   }
-  async getCorreos(validar:string):Promise<number>{
-    var numCorreos = 0;
-    await this.http.post<number>(`${this.ruta}/validarcorreo`,validar).subscribe(e => {
+  async getCorreos(validar:string,id:Number){
+    var numCorreos!:number;
+    var dato = await this.http.post<number>(`${this.ruta}/validarcorreo`,{correo:validar,id})
+    dato.subscribe(e => {
       numCorreos = e
     })
-    return await numCorreos
+    return numCorreos
   }
 }

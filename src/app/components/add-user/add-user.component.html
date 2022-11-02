@@ -3,33 +3,48 @@
         <div class="card">
             <div class="card-body">
                 <form>
-                    <div class="form-group">
+                    <div class="form-group" [formGroup]="form">
                        <label>Primer nombre</label>
-                       <input [(ngModel)]="cli.PNombre" class="form-control" name="PNombre" pattern="[A-Z]" required/>
+                       <input [(ngModel)]="cli.PNombre" formControlName="PNombre" class="input form-control" name="PNombre"/>
+                       <div>
+                        {{ form.get("PNombre")?.errors | json}}
+                      </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" [formGroup]="form">
                        <label>Segundo nombre</label>      
-                       <input [(ngModel)]="cli.SNombre" name="SNombre" class="form-control" pattern="[A-Z]"/>
+                       <input [(ngModel)]="cli.SNombre" formControlName="SNombre" name="SNombre" class="form-control" />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" [formGroup]="form">
                         <label>Primer Apellido</label>
-                        <input [(ngModel)]="cli.PApellido" name="PApellido" class="form-control" required/>
+                        <input [(ngModel)]="cli.PApellido" formControlName="PApellido" name="PApellido" class="form-control"/>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" [formGroup]="form">
                         <label>Segundo apellido</label>
-                        <input [(ngModel)]="cli.SApellido" name="SApellido" class="form-control"/>
+                        <input [(ngModel)]="cli.SApellido" formControlName="SApellido" name="SApellido" class="form-control"/>
                     </div>
                     <div class="form-group">
                         <label>Inicio ingreso</label>
-                        <input [(ngModel)]="cli.registro.InicioIngreso" name="InicioIngreso" class="form-control" type="date" required/>
+                        <input [(ngModel)]="cli.registro.InicioIngreso" name="InicioIngreso" class="form-control" type="date"/>
                     </div>
                     <div class="form-group">
-                        <label>Pais empleo</label> 
-                        <input [(ngModel)]="cli.registro.PaisEmpleo" name="PaisEmpleo" class="form-control" required/>
+                        <label for="pais">Pais empleo</label> 
+                        <!--<input [(ngModel)]="cli.registro.PaisEmpleo" name="PaisEmpleo" class="form-control" required/>-->
+                        <select #pais id="pais" name="pais" class="form-control">
+                            <optgroup>
+                                <option value="usa">USA</option>
+                                <option value="col">COL</option>
+                            </optgroup>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Tipo identificacion</label>     
-                        <input [(ngModel)]="cli.registro.TipoIdentificacion" name="TipoIdentificacion" class="form-control"/>
+                        <!---<input [(ngModel)]="cli.registro.TipoIdentificacion" name="TipoIdentificacion" class="form-control"/>-->
+                        <select #iIdent class="form-control">
+                            <optgroup>
+                                <option value="cc">CC</option>
+                                <option value="ti">TI</option>
+                            </optgroup>
+                        </select>  
                     </div>
                     <div class="form-group">
                         <label>Numero identificacion</label>
@@ -51,7 +66,7 @@
                         <label>Fecha hora registro</label>
                         <input [(ngModel)]="cli.registro.FechaHoraRegistro" name="FechaHoraRegistro" class="form-control" type="date" disabled/>
                     </div>
-                    <input type="button" (click)="modificar==false?guardar():modificarUser()" class="{{ modificar == false ? 'btn btn-success' : 'btn btn-danger'}}" value="{{modificar==false?'Guardar':'Modificar'}}"/>
+                    <input id="btn" type="button" (click)="modificar==false?guardar():modificarUser()" class="{{ modificar == false ? 'btn btn-success' : 'btn btn-danger'}}" value="{{modificar==false?'Guardar':'Modificar'}}" placeholder="{{modificar==false?'Guardar':'Modificar'}}"/>
                 </form>
             </div>
         </div>
@@ -64,3 +79,30 @@
                 <p>{{cli.registro.CorreoElectronico}} {{cli.registro.Estado}}</p>
     </div>
 </div>
+
+<!--<div [formGroup]="form">
+    <label for="test">test</label>
+    <input #test id="test" name="test"
+      class="input"
+      [class.is-danger]="form.get('test')?.dirty && form.get('test')?.invalid"
+      type="text"
+      formControlName="test"
+    />
+    <div>
+        {{ form.get("test")?.errors | json}}
+    </div>
+    <input #testt id="test" name="test"/>
+    <select #sect id="sect">
+        <optgroup>
+        <option value="usa">USA</option>
+        <option value="col">COL</option>
+        </optgroup>
+    </select>
+    <select #tdoc>
+        <optgroup>
+            <option value="CC">CC</option>
+            <option value="TI">TI</option>
+        </optgroup>
+    </select>
+    <button #btn id="env">probar</button>
+</div>-->

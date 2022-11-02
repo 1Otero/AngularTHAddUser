@@ -6,7 +6,6 @@
         <th>Modificar | Eliminar</th>
     </thead>
     <tbody>
-        <!--<tr *ngFor="let i of listObservable | async">-->
         <tr *ngFor="let i of listObservable">  
             <th>{{i.PNombre}} {{i.SNombre}}</th>
             <th>{{i.PApellido}} {{i.SApellido}}</th>
@@ -20,7 +19,7 @@
 <div class="container" *ngIf="cargando == true">
     <h1>Cargando....</h1>
 </div>
-<div style="height:380px;"></div>
+<div style="height:270px;"></div>
 <div *ngIf="cargando != true">
 <mat-form-field>
     <mat-label>Buscar</mat-label>

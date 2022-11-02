@@ -8,8 +8,9 @@ import { ListUserComponent } from './components/list-user/list-user.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import {UserServicesService} from './services/user-services.service'
 import {HttpClientModule} from '@angular/common/http'
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
 
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
@@ -26,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatTableModule,
     MatInputModule

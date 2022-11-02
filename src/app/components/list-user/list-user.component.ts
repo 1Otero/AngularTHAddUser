@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import {UserServicesService} from '../../services/user-services.service'
 import {user} from '../../model/user'
@@ -18,8 +18,9 @@ export class ListUserComponent implements OnInit {
   areas:any=['Ventas','Mercadeo','Taquillas','call center','IT']
   //listObservable!:Observable<user[]>
   listObservable!:user[]
+  @ViewChild('eliminar') eliminar!:ElementRef
   columnas:String[]=["Id","PNombre","SNombre","PApellido","SApellido","PaisEmpleo","Area","NumeroIdentificacion","CorreoElectronico"]
-  constructor(private UService:UserServicesService) { }
+  constructor(private UService:UserServicesService,private renderer2:Renderer2) { }
 
   ngOnInit(): void {
     this.cargando=true
@@ -40,7 +41,11 @@ export class ListUserComponent implements OnInit {
     this.dataSource.filter = filtro.trim().toLowerCase()
   }
   async deleteUser(Id:Number){
-    this.UService.delete(Id)
-    this.getAllUsers
+    await this.UService.delete(Id)
+    this.cargando=true
+    setTimeout(() => {
+      this.getAllUsers()
+      this.cargando=false
+    },1000)
   }
 }
